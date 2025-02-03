@@ -1,0 +1,2 @@
+[default.general]
+chip = "nRF51822_xxAA"      # MicroBit Go uses nRF51822_QFAA
