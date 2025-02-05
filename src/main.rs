@@ -56,7 +56,7 @@ fn update_automata<F>(automata: [[u8; 5]; 5], transition_function: F) -> [[u8; 5
 where
     F: Fn(u8, [u8; 8]) -> u8
 {
-    let mut result = automata;
+    let mut result = [[0; 5]; 5];
 
     for row in 0..5 {
         for col in 0..5 {
@@ -86,7 +86,7 @@ fn conway_transitions(center_cell: u8, neighbors: [u8; 8]) -> u8 {
 
     match (center_cell, live_neighbor_count) {
         (0, 3) => 1,
-        (_, 2..=3) => 1,
+        (1, 2..=3) => 1,
         _ => 0,
     }
 }
@@ -99,7 +99,7 @@ fn main() -> ! {
 
     Clocks::new(board.CLOCK).start_lfclk();
 
-    let mut rtc0 = Rtc::new(board.RTC0, 2047).unwrap();
+    let mut rtc0 = Rtc::new(board.RTC0, 3000).unwrap();
     rtc0.enable_event(RtcInterrupt::Tick);
     rtc0.enable_interrupt(RtcInterrupt::Tick, None);
     rtc0.enable_counter();
